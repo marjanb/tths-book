@@ -201,8 +201,8 @@ function leafCount(): number {
 function buildLeaves(): void {
   // A fold in flight has nowhere to go home to once the leaves are rebuilt.
   foldLayer.textContent = '';
-  bookEl.classList.remove('folding');
-  bookEl.style.removeProperty('--fold');
+  foldLayer.classList.remove('folding');
+  foldLayer.style.removeProperty('--fold');
   leavesEl.textContent = '';
   leaves = [];
   lifting = null;
@@ -355,7 +355,7 @@ function update(animate = true): void {
   progressEl.style.width = `${(flipped / total) * 100}%`;
 
   fitFaces(visibleFaces());
-  if (!bookEl.classList.contains('folding')) reveal(0);
+  if (!foldLayer.classList.contains('folding')) reveal(0);
 
   const left = mode === 'spread' ? pages[flipped * 2 - 1] : undefined;
   const right = mode === 'spread' ? pages[flipped * 2] : pages[flipped];
@@ -378,26 +378,33 @@ function fold(leaf: HTMLElement | null, direction: 'forward' | 'back'): void {
   if (!flap) return;
 
   const from = direction === 'forward' ? 1 : 0;
-  leaf.classList.add('folding');
   flaps.set(leaf, flap);
   foldLayer.append(flap, el('div', 'fold-edge'), el('div', 'fold-crease'));
-  bookEl.style.setProperty('--fold', String(from));
-  void bookEl.offsetWidth;
-  bookEl.classList.add('folding');
-  bookEl.style.setProperty('--fold', String(1 - from));
+
+  // `--fold` goes on these two and not on the book: it inherits, and a value
+  // changing on #book restyles all 68 pages on every frame of the turn.
+  for (const host of [leaf, foldLayer]) {
+    host.classList.add('folding');
+    host.style.setProperty('--fold', String(from));
+  }
+  void leaf.offsetWidth;
+  for (const host of [leaf, foldLayer]) {
+    host.style.setProperty('--fold', String(1 - from));
+  }
 }
 
 function unfold(leaf: HTMLElement): void {
   if (!leaf.classList.contains('folding')) return;
   const flap = flaps.get(leaf);
   leaf.classList.add('no-anim');
-  bookEl.classList.remove('folding');
-  leaf.classList.remove('folding');
+  for (const host of [leaf, foldLayer]) {
+    host.classList.remove('folding');
+    host.style.removeProperty('--fold');
+  }
   // Back in place, and in its original order: front, then back.
   if (flap) leaf.append(flap);
   flaps.delete(leaf);
   foldLayer.textContent = '';
-  bookEl.style.removeProperty('--fold');
   void leaf.offsetWidth;
   leaf.classList.remove('no-anim');
 }
@@ -443,9 +450,9 @@ function goToPage(pageIndex: number): void {
 /* --------------------------------------------------------------- controls -- */
 
 // Once a page has landed it belongs to its stack again.
-bookEl.addEventListener('transitionend', (event) => {
-  if (event.propertyName !== '--fold' || event.target !== bookEl) return;
-  if (!bookEl.classList.contains('folding')) return;
+foldLayer.addEventListener('transitionend', (event) => {
+  if (event.propertyName !== '--fold' || event.target !== foldLayer) return;
+  if (!foldLayer.classList.contains('folding')) return;
   if (lifting) unfold(lifting);
   lifting = null;
   applyZ();

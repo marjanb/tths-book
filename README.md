@@ -32,6 +32,16 @@ All of it is CSS; no animation library is pulled in.
   paper is off the page. The lift widens the crease, deepens the shadow the
   standing sheet casts, brightens the lit edge of the bend and pushes the
   drop-shadow out — all strongest halfway through, when the sheet is upright.
+  The whole thing is built for a phone, which is where it gets expensive.
+  `--fold` is set on the folding leaf and on the fold layer, never on `#book`:
+  it inherits, so a value changing on the book restyles all 68 pages on every
+  frame of the turn, where this way it reaches about thirty elements. The
+  crease and the edge shadow move with `transform` and fade with `opacity`,
+  both compositor-friendly — driving `left` and `width` relaid out the layer
+  every frame, and gradients whose stops rode `--fold` had to be re-rasterised
+  every frame. Below 900px the sky also stops drifting: three blurred blobs
+  and five motes are constant GPU work behind a page turn.
+
   Three things are easy to get wrong here. The folded half has to be moved
   into `.fold-layer` for the duration, because z-index does not order coplanar
   siblings inside a `preserve-3d` stack — left in place, the flap paints

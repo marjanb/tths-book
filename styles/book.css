@@ -483,9 +483,17 @@ body {
  *          half of the sheet would be. At fold = 0 that is pixel-identical to
  *          the resting flipped state, so the hand-off is invisible.
  *
- * The folded half is moved into `.fold-layer` for the duration, because inside
- * a `preserve-3d` stack z-index does not order coplanar siblings: left where
- * it was, the flap paints behind the pages it is supposed to sweep over.
+ * Everything here is built for a phone, which is where this gets expensive:
+ *   · `--fold` is set on the folding leaf and on the fold layer, never on the
+ *     book. It inherits, and a value changing on #book restyles all 68 pages
+ *     on every frame of the turn; this way it reaches about thirty elements.
+ *   · The crease and the edge shadow move with `transform` and fade with
+ *     `opacity`, both compositor-friendly. Driving `left`/`width` relaid out
+ *     the layer every frame, and gradients whose stops rode `--fold` had to be
+ *     re-rasterised every frame.
+ *   · The folded half is moved into `.fold-layer`, because inside a
+ *     `preserve-3d` stack z-index does not order coplanar siblings: left where
+ *     it was, the flap paints behind the pages it is supposed to sweep over.
  */
 @property --fold {
   syntax: '<number>';
@@ -493,34 +501,23 @@ body {
   initial-value: 1;
 }
 
-.book.folding {
+.leaf.folding,
+.fold-layer.folding {
   transition: --fold var(--flip) cubic-bezier(0.46, 0.03, 0.3, 1);
-  --fold-ink: min(1, calc(var(--fold) * 4));
-  --fold-lift: calc(4 * var(--fold) * (1 - var(--fold)));
-  --fold-on: min(1, calc((1 - var(--fold)) * 8));
 }
 
 .leaf.folding {
   /* The leaf itself holds still; the crease does the moving. */
   transform: none !important;
-  transition: none;
+  transition: --fold var(--flip) cubic-bezier(0.46, 0.03, 0.3, 1);
 }
 
 .leaf.folding .face-front {
   clip-path: inset(0 calc((1 - var(--fold)) * 100%) 0 0);
+  will-change: clip-path;
 }
 
-/* Two numbers drive every bit of fold shading.
-   --fold-ink  eases off over the last quarter of the turn, so the crease
-               dissolves as the page settles rather than being switched off at
-               full strength when the halves go back together.
-   --fold-lift is how far the paper stands off the page: a parabola, zero at
-               both ends and 1 halfway, where the bend is steepest. It widens
-               and deepens the crease mid-turn, the way a real sheet does. */
 .fold-layer {
-  --fold-ink: min(1, calc(var(--fold) * 4));
-  --fold-lift: calc(4 * var(--fold) * (1 - var(--fold)));
-  --fold-on: min(1, calc((1 - var(--fold)) * 8));
   position: absolute;
   top: 0;
   left: 50%;
@@ -539,84 +536,63 @@ body {
   will-change: transform, clip-path;
 }
 
-/* Paper darkens as it bends into the crease. The stops ride `--fold`, so the
-   darkest edge always lands exactly where the clip cuts: at the fold. */
-.fold-layer .face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgba(var(--curl), calc(0.16 * var(--fold-ink))) 0%,
-    rgba(var(--curl), calc(0.02 * var(--fold-ink))) calc((1 - var(--fold)) * 52%),
-    rgba(var(--curl), calc((0.06 + 0.12 * var(--fold-lift)) * var(--fold-ink))) calc((1 - var(--fold)) * 86%),
-    rgba(var(--curl), calc((0.22 + 0.2 * var(--fold-lift)) * var(--fold-ink))) calc((1 - var(--fold)) * 100%)
-  );
+/* How strongly the fold is shaded: `--fold-ink` eases off over the last
+   quarter so the crease dissolves as the page settles, `--fold-on` keeps the
+   first frame clean, and `--fold-lift` — a parabola, zero at both ends and 1
+   halfway — stands for how far the paper is off the page. Only `opacity` and
+   `scale` read them, so a frame costs no repaint. */
+.fold-layer.folding {
+  --fold-ink: min(1, calc(var(--fold) * 4));
+  --fold-on: min(1, calc((1 - var(--fold)) * 8));
+  --fold-lift: calc(4 * var(--fold) * (1 - var(--fold)));
 }
 
-/* The crease: shadow on the folded paper, a highlight along the fold itself. */
-/* The shadow the lifted half throws past its own free edge. It cannot be a
-   filter on the flap: clip-path is applied after filter, so the shadow — which
-   by definition falls outside the box — would be clipped away with it. */
-.fold-edge {
-  --edge-w: calc(10px + var(--fold-lift) * 34px);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc((var(--fold) * 2 - 1) * 100%);
-  width: var(--edge-w);
-  margin-left: calc(var(--edge-w) * -1);
-  opacity: calc(var(--fold-ink) * var(--fold-on));
-  background: linear-gradient(
-    90deg,
-    rgba(var(--curl), 0) 0%,
-    rgba(var(--curl), calc(0.05 + 0.12 * var(--fold-lift))) 70%,
-    rgba(var(--curl), calc(0.1 + 0.2 * var(--fold-lift))) 100%
-  );
-}
-
+.fold-edge,
 .fold-crease {
-  --crease-w: calc(18px + var(--fold-lift) * 60px);
   position: absolute;
   /* Full height of the page, edge to edge — and no further: past the paper
      there is nothing for a crease to fall on. */
   top: 0;
   bottom: 0;
-  left: calc(var(--fold) * 100%);
-  width: var(--crease-w);
-  margin-left: calc(var(--crease-w) * -0.62);
-  opacity: calc(var(--fold-ink) * var(--fold-on));
-  /* Left of the line is the shadow the standing paper casts on the page
-     below, widest while the sheet is upright; the line itself is the lit edge
-     of the bend; right of it the flat half dips into the fold. */
+  left: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* The shadow the lifted half throws past its own free edge. It cannot be a
+   filter on the flap: clip-path is applied after filter, so the shadow — which
+   by definition falls outside the box — would be clipped away with it. */
+.fold-edge {
+  width: 44px;
+  opacity: calc(var(--fold-ink) * var(--fold-on) * var(--fold-lift));
+  transform: translateX(calc((var(--fold) * 2 - 1) * var(--page-w) - 100%));
   background: linear-gradient(
     90deg,
     rgba(var(--curl), 0) 0%,
-    rgba(var(--curl), calc(0.06 + 0.1 * var(--fold-lift))) 34%,
-    rgba(var(--curl), calc(0.16 + 0.26 * var(--fold-lift))) 56%,
-    rgba(var(--curl), calc(0.2 + 0.3 * var(--fold-lift))) 61%,
-    rgba(255, 255, 255, calc(0.07 + 0.16 * var(--fold-lift))) 67%,
-    rgba(255, 255, 255, calc(0.03 + 0.07 * var(--fold-lift))) 79%,
-    rgba(var(--curl), calc(0.04 * var(--fold-lift))) 91%,
-    rgba(var(--curl), 0) 100%
+    rgba(var(--curl), 0.14) 70%,
+    rgba(var(--curl), 0.26) 100%
   );
 }
 
-/* The flat half dips as it runs into the bend, so it darkens towards the
-   crease — its clip edge sits at `fold`, so the stops ride that. */
-.leaf.folding .face-front::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
+/* Left of the line is the shadow the standing paper casts on the page below;
+   the line itself is the lit edge of the bend; right of it the flat half dips
+   into the fold. The whole strip widens with the lift. */
+.fold-crease {
+  width: 78px;
+  opacity: calc(var(--fold-ink) * var(--fold-on));
+  transform:
+    translateX(calc(var(--fold) * var(--page-w) - 48px))
+    scaleX(calc(0.25 + 0.75 * var(--fold-lift)));
   background: linear-gradient(
     90deg,
-    transparent calc(var(--fold) * 100% - 90px),
-    rgba(var(--curl), calc((0.05 + 0.13 * var(--fold-lift)) * var(--fold-on))) calc(var(--fold) * 100% - 18px),
-    rgba(var(--curl), calc((0.1 + 0.22 * var(--fold-lift)) * var(--fold-on))) calc(var(--fold) * 100%)
+    rgba(var(--curl), 0) 0%,
+    rgba(var(--curl), 0.15) 34%,
+    rgba(var(--curl), 0.4) 56%,
+    rgba(var(--curl), 0.48) 61%,
+    rgba(255, 255, 255, 0.22) 67%,
+    rgba(255, 255, 255, 0.09) 79%,
+    rgba(var(--curl), 0.04) 91%,
+    rgba(var(--curl), 0) 100%
   );
 }
 
@@ -1108,6 +1084,16 @@ body {
 
   .deco-sun, .deco-flake { opacity: 0.35; }
   .deco-flower, .deco-cloud { display: none; }
+
+  /* A phone has better things to do than drift three blurred blobs and five
+     motes behind a page turn. */
+  .blob {
+    animation: none;
+    filter: blur(28px);
+  }
+
+  .blob-mid,
+  .mote { display: none; }
 }
 
 /* svh is the better unit where it exists, but it must not be the only one. */
