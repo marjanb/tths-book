@@ -338,6 +338,14 @@ body {
   display: grid;
   place-items: center;
   width: 100%;
+  /* The folded half is clipped to shape by clip-path, but its layout box still
+     swings a page-width past the book and counts as scrollable overflow — a
+     scrollbar mid-turn, most visible on a phone. `clip` trims that without
+     making a scroll container. No clip margin: it applies on every side, so
+     any room left for the crease above the page leaks sideways as overflow —
+     and the stage is already taller than the book, which is where the crease
+     gets its overhang. */
+  overflow: clip;
 }
 
 .book {

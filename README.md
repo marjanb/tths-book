@@ -148,8 +148,13 @@ control what lands on a spread. Page numbers, the contents page and the chapter
 drawer are generated; chapters are automatically padded to open on a left-hand
 page.
 
-Only `.face` clips (so a page can't bleed past the paper); nothing in the book
-scrolls. That works because the fit is guaranteed: `fitFaces()` shrinks a too-full page's type, and with it its art
+`.face` clips, so a page can't bleed past the paper, and `.stage` uses
+`overflow: clip` — the folded half is shaped by `clip-path`, but its layout
+box still swings a page-width past the book and counts as scrollable overflow,
+which showed up as a scrollbar mid-turn on phones. `clip` trims it without
+making a scroll container; no `overflow-clip-margin`, because that applies on
+every side and any room left for the crease leaks sideways as overflow again.
+Nothing in the book scrolls. That works because the fit is guaranteed: `fitFaces()` shrinks a too-full page's type, and with it its art
 (capped at `42% * --fit` of the page height), until the blocks fit, down to a
 floor of 58%. A page that still doesn't fit at the floor is named in a console
 warning; split it in `content.ts` rather than letting it overlap. Across all
