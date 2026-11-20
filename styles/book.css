@@ -360,17 +360,17 @@ body {
   animation: book-in 900ms cubic-bezier(0.22, 1.1, 0.3, 1) both;
 }
 
-/* The book's shadow is cast by the book's own shape, not by a filter over its
-   contents: a filter takes the whole subtree as its silhouette, so mid-turn it
-   traced the folded half — a full-height rectangle with square corners — and
-   printed its shadow above and below the paper. */
+/* A hook for skins that want the book to cast a shadow. The default book does
+   not: anything cast here lands past the paper, where there is nothing for it
+   to fall on. It must never be a filter on .book — a filter takes the whole
+   subtree as its silhouette, so mid-turn it traces the folded half and prints
+   that shape above and below the page. */
 .book::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
   border-radius: var(--round);
-  box-shadow: 0 26px 40px rgba(var(--curl), 0.26);
 }
 
 /* Closed, only the cover is there to cast one. */
