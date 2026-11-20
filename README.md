@@ -32,9 +32,16 @@ All of it is CSS; no animation library is pulled in.
   paper is off the page. The lift widens the crease, deepens the shadow the
   standing sheet casts, brightens the lit edge of the bend and pushes the
   drop-shadow out — all strongest halfway through, when the sheet is upright.
-  **A handset does not fold at all.** Below 900px the page simply changes, the
-  tap lands at once with no hold, and the staggered entrance carries the
-  transition. The fold is a desktop luxury: two animated `clip-path`s and a
+  **A handset does not fold at all, and is deliberately plainer.** Below 900px
+  the page simply changes, the tap lands at once with no hold, and the
+  staggered entrance carries the transition. The sky, the washes on each page,
+  the paper shading, the illustration shadows and the blur behind the drawer
+  are all dropped, the background becomes one gradient, and `text-wrap: pretty`
+  and `hyphens: auto` give way to the plain ones — both re-run their
+  line-breaking on every fit. A Pixel rasterises at about 2.6x device pixels
+  with a fraction of a laptop's fill rate, so soft, blurred and multi-layered
+  surfaces cost it far more than they cost a desktop. Device mode on a laptop
+  will not show you any of this: it emulates the viewport, not the GPU. The fold is a desktop luxury: two animated `clip-path`s and a
   moving crease over a stack of pages is more than a phone will give you at
   60fps, and a turn that stutters is worse than one that doesn't animate. The
   sky also stops moving there, the drawer drops its `backdrop-filter`, and the

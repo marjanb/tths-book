@@ -54,7 +54,6 @@ body {
   gap: 0.6rem;
   padding: 0.75rem 1rem 1.25rem;
   background: var(--body-bg);
-  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
 }
@@ -1089,20 +1088,38 @@ body {
   .deco-sun, .deco-flake { opacity: 0.35; }
   .deco-flower, .deco-cloud { display: none; }
 
-  /* A phone has better things to do than drift blurred blobs behind a page
-     turn, blur what is under the drawer, or keep a layer per title. */
-  .blob {
-    animation: none;
-    filter: none;
-    opacity: 0.35;
-  }
+  /* Austerity for a handset. A Pixel rasterises at about 2.6x device pixels
+     with a fraction of a laptop's fill rate, so every soft, blurred or
+     multi-layered surface is paid for again at that scale. What goes:
+     the drifting sky, the stacked washes on each page, the blur behind the
+     drawer, the compositing layer per title, and the two line-breaking passes
+     (`text-wrap: pretty` and `hyphens: auto` both re-run on every fit). */
+  .sky { display: none; }
 
-  .blob-mid,
-  .mote { display: none; }
+  /* One gradient instead of three stacked radials, since the body is now the
+     only full-screen surface left to paint. */
+  body {
+    background:
+      linear-gradient(165deg, #ffe7cd 0%, #fdf3e6 45%, #e3f0fa 100%);
+  }
 
   .toc-panel { backdrop-filter: none; }
 
   .page-title { will-change: auto; }
+
+  .page { background-image: none; }
+
+  .page::after { display: none; }
+
+  .face-shade { display: none; }
+
+  .illo { box-shadow: none; }
+
+  .para,
+  .toc-title {
+    text-wrap: auto;
+    hyphens: manual;
+  }
 
   /* The page changes outright here, so nothing should be mid-flight. */
   .leaf { transition: none; }
