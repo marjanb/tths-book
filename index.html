@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="sl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToploTeta in HladnoStric</title>
+  <meta name="description" content="Slikanica o ToploTeti in HladnoStricu – knjiga z listanjem.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/book.css">
+  <link rel="stylesheet" href="styles/skins.css">
+</head>
+<body>
+  <!-- Weather around the book: her sun, his snow, and a lot of drifting. -->
+  <div class="sky" aria-hidden="true">
+    <span class="blob blob-warm"></span>
+    <span class="blob blob-cold"></span>
+    <span class="blob blob-mid"></span>
+    <svg class="deco deco-sun" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"><circle cx="50" cy="50" r="20" fill="currentColor" stroke="none"/><path d="M50 8v10M50 82v10M8 50h10M82 50h10M20 20l7 7M73 73l7 7M80 20l-7 7M27 73l-7 7"/></g></svg>
+    <svg class="deco deco-flake" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"><path d="M50 10v80M15 30l70 40M85 30L15 70"/><path d="M50 24l-9-9M50 24l9-9M50 76l-9 9M50 76l9 9"/></g></svg>
+    <svg class="deco deco-flower" viewBox="0 0 100 100"><g fill="currentColor"><circle cx="50" cy="26" r="15"/><circle cx="74" cy="50" r="15"/><circle cx="50" cy="74" r="15"/><circle cx="26" cy="50" r="15"/></g><circle cx="50" cy="50" r="11" fill="#fff6e4"/></svg>
+    <svg class="deco deco-cloud" viewBox="0 0 120 60"><g fill="currentColor"><circle cx="35" cy="36" r="20"/><circle cx="62" cy="26" r="24"/><circle cx="90" cy="38" r="18"/><rect x="30" y="38" width="62" height="18" rx="9"/></g></svg>
+    <span class="mote mote-1"></span>
+    <span class="mote mote-2"></span>
+    <span class="mote mote-3"></span>
+    <span class="mote mote-4"></span>
+    <span class="mote mote-5"></span>
+  </div>
+
+  <header class="bar">
+    <button id="toc-toggle" class="bar-btn" type="button" aria-controls="toc-panel">
+      <span class="bar-btn-icon" aria-hidden="true">✦</span>Kazalo
+    </button>
+    <label class="skin-picker">
+      <span class="skin-label">Videz</span>
+      <select id="skin" class="skin-select">
+        <option value="topla">Topla slikanica</option>
+        <option value="nocna">Nočna pravljica</option>
+        <option value="papir">Stari papir</option>
+        <option value="risanka">Risanka</option>
+        <option value="zima">Zimska</option>
+        <option value="sladoled">Sladoled</option>
+        <option value="zvezek">Šolski zvezek</option>
+        <option value="kolaz">Izrezanka</option>
+        <option value="strip">Strip</option>
+        <option value="voscenke">Voščenke</option>
+        <option value="disko">Disko</option>
+      </select>
+    </label>
+    <div class="progress" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div>
+    <span id="position" class="position" aria-live="polite"></span>
+  </header>
+
+  <main class="stage">
+    <div id="book" class="book at-start">
+      <div class="book-base" aria-hidden="true"></div>
+      <div id="leaves" class="leaves"></div>
+      <div id="fold-layer" class="fold-layer" aria-hidden="true"></div>
+      <div class="spine" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <nav class="controls">
+    <button id="prev" class="nav-btn" type="button" aria-label="Prejšnja stran">‹</button>
+    <button id="next" class="nav-btn" type="button" aria-label="Naslednja stran">›</button>
+  </nav>
+
+  <aside id="toc-panel" class="toc-panel" aria-label="Kazalo">
+    <div class="toc-head">
+      <h2 class="toc-heading">Kazalo</h2>
+      <button id="toc-close" class="icon-btn" type="button" aria-label="Zapri kazalo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="cross" d="M7 7l10 10M17 7L7 17" /></svg>
+      </button>
+    </div>
+    <div id="toc-list"></div>
+  </aside>
+
+  <script type="module" src="dist/book.js"></script>
+</body>
+</html>

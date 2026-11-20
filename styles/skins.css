@@ -1,0 +1,658 @@
+/* Alternative looks for the book. Each skin only re-sets tokens plus a few
+   deliberate extras; nothing here knows about the book's structure. */
+
+/* ---------------------------------------------------- 2 · Nočna pravljica -- */
+
+[data-skin='nocna'] {
+  color-scheme: dark;
+  --warm: #ffc45c;
+  --cold: #8fc8ff;
+  --leader: rgba(190, 175, 215, 0.4);
+  --ink: #f2e9e0;
+  --ink-soft: #b3a6c4;
+  --paper: #241f36;
+  --paper-warm: #2b2342;
+  --paper-edge: #3d3458;
+  --curl: 10, 6, 24;
+  --body-bg:
+    radial-gradient(120% 85% at 15% -10%, #3c2f63 0%, transparent 55%),
+    radial-gradient(120% 85% at 85% 110%, #16304f 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 50%, #241e3c 0%, #151129 100%);
+  --panel-bg: linear-gradient(170deg, #2c2444, #241f36 60%, #1b2440);
+  --chip-bg: linear-gradient(140deg, #4a3b6e, #342b52 55%, #27375c);
+  --chip-border: rgba(255, 255, 255, 0.25);
+  --chip-shadow: rgba(10, 6, 24, 0.5);
+}
+
+[data-skin='nocna'] .theme-sun    { --a1: #ffc45c; --a2: #ff9a6a; }
+[data-skin='nocna'] .theme-ice    { --a1: #7fd4f0; --a2: #a6b8ff; }
+[data-skin='nocna'] .theme-dawn   { --a1: #ff9fb3; --a2: #ffc98a; }
+[data-skin='nocna'] .theme-honey  { --a1: #ffbb63; --a2: #e39ad2; }
+[data-skin='nocna'] .theme-ember  { --a1: #ff8a63; --a2: #7fb6ff; }
+[data-skin='nocna'] .theme-lilac  { --a1: #c3a6ff; --a2: #ff9fe0; }
+[data-skin='nocna'] .theme-meadow { --a1: #8fdc96; --a2: #ffd978; }
+[data-skin='nocna'] .theme-rainbow{ --a1: #ffa86a; --a2: #a8aaff; }
+[data-skin='nocna'] .theme-twins  { --a1: #ff9fb8; --a2: #8fc8ff; }
+[data-skin='nocna'] .numbered li::before {
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+  color: #241f36;
+}
+
+[data-skin='nocna'] .deco-sun { color: #ffd98a; opacity: 0.35; }
+[data-skin='nocna'] .deco-cloud { color: #3a3160; opacity: 0.6; }
+[data-skin='nocna'] .deco-flower { color: #c3a6ff; }
+[data-skin='nocna'] .blob { opacity: 0.4; }
+[data-skin='nocna'] .face-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.12) 8%,
+    transparent 24%,
+    transparent 86%,
+    rgba(0, 0, 0, 0.14) 100%
+  );
+}
+
+/* -------------------------------------------------------- 3 · Stari papir -- */
+
+[data-skin='papir'] {
+  --warm: #a8752a;
+  --cold: #4a6f86;
+  --leader: rgba(123, 106, 79, 0.5);
+  --font-display: Fraunces, 'Iowan Old Style', Palatino, Georgia, serif;
+  --font-body: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --ink: #3f3426;
+  --ink-soft: #7b6a4f;
+  --paper: #f7ecd5;
+  --paper-warm: #f2e2c3;
+  --paper-edge: #ddc9a2;
+  --round: clamp(4px, 0.8vw, 9px);
+  --curl: 92, 70, 36;
+  --body-bg:
+    radial-gradient(120% 85% at 20% 0%, #e8d6b2 0%, transparent 60%),
+    radial-gradient(100% 80% at 80% 100%, #d9c7a3 0%, transparent 60%),
+    linear-gradient(160deg, #efe0c2, #e4d2ae);
+  --panel-bg: linear-gradient(170deg, #f7ecd5, #ecdcbc);
+  --chip-bg: linear-gradient(140deg, #efdfbd, #f7ecd5);
+  --chip-border: #cab68f;
+  --chip-shadow: rgba(92, 70, 36, 0.22);
+  --sky-opacity: 0.4;
+}
+
+[data-skin='papir'] .theme-sun    { --a1: #a8752a; --a2: #8a6a2f; }
+[data-skin='papir'] .theme-ice    { --a1: #4a6f86; --a2: #6b8a96; }
+[data-skin='papir'] .theme-dawn   { --a1: #a85f58; --a2: #a67c3c; }
+[data-skin='papir'] .theme-honey  { --a1: #9b6f2c; --a2: #8a5a56; }
+[data-skin='papir'] .theme-ember  { --a1: #a35134; --a2: #4a6f86; }
+[data-skin='papir'] .theme-lilac  { --a1: #6d5c8c; --a2: #8f5f80; }
+[data-skin='papir'] .theme-meadow { --a1: #5c7a44; --a2: #96752c; }
+[data-skin='papir'] .theme-rainbow{ --a1: #a3682f; --a2: #5e6290; }
+[data-skin='papir'] .theme-twins  { --a1: #a35f6c; --a2: #4f7490; }
+
+[data-skin='papir'] .illo { border-radius: 3px; box-shadow: none; }
+[data-skin='papir'] .illo img { filter: sepia(0.42) contrast(0.95); }
+[data-skin='papir'] .page-title { letter-spacing: 0.01em; }
+[data-skin='papir'] .para { text-align: justify; }
+
+/* ------------------------------------------------------------ 4 · Risanka -- */
+
+[data-skin='risanka'] {
+  --warm: #e2662e;
+  --cold: #0f86c4;
+  --leader: rgba(35, 32, 31, 0.4);
+  --font-display: Fraunces, Georgia, serif;
+  --ink: #23201f;
+  --ink-soft: #5d5856;
+  --paper: #fffdf6;
+  --paper-warm: #fff4d6;
+  --paper-edge: #23201f;
+  --round: clamp(20px, 3.4vw, 42px);
+  --curl: 35, 32, 30;
+  --body-bg:
+    radial-gradient(110% 80% at 15% 0%, #ffd84d 0%, transparent 52%),
+    radial-gradient(110% 80% at 85% 100%, #4ec3f0 0%, transparent 52%),
+    linear-gradient(160deg, #ffe9a8, #bfe9fb);
+  --panel-bg: linear-gradient(170deg, #fff8dd, #e6f6ff);
+  --chip-bg: linear-gradient(140deg, #ffd84d, #ffe9a8);
+  --chip-border: #23201f;
+  --chip-shadow: rgba(35, 32, 31, 0.3);
+}
+
+[data-skin='risanka'] .theme-sun    { --a1: #f08c00; --a2: #e23d2e; }
+[data-skin='risanka'] .theme-ice    { --a1: #0f86c4; --a2: #19b7c9; }
+[data-skin='risanka'] .theme-dawn   { --a1: #e2447a; --a2: #f08c00; }
+[data-skin='risanka'] .theme-honey  { --a1: #e07a00; --a2: #a3399b; }
+[data-skin='risanka'] .theme-ember  { --a1: #e23d2e; --a2: #0f86c4; }
+[data-skin='risanka'] .theme-lilac  { --a1: #7a3fd0; --a2: #d13fa6; }
+[data-skin='risanka'] .theme-meadow { --a1: #2f9b3f; --a2: #d7a300; }
+[data-skin='risanka'] .theme-rainbow{ --a1: #e2662e; --a2: #4a4fd0; }
+[data-skin='risanka'] .theme-twins  { --a1: #e2447a; --a2: #0f86c4; }
+
+[data-skin='risanka'] .face { box-shadow: inset 0 0 0 3px var(--paper-edge); }
+[data-skin='risanka'] .book-base { box-shadow: inset 0 0 0 3px var(--paper-edge); }
+[data-skin='risanka'] .book { filter: drop-shadow(0 14px 0 rgba(35, 32, 31, 0.85)); }
+[data-skin='risanka'] .page-title { -webkit-text-stroke: 0; letter-spacing: -0.02em; }
+[data-skin='risanka'] .illo {
+  border-radius: 22px;
+  border: 3px solid var(--paper-edge);
+  box-shadow: 6px 6px 0 rgba(35, 32, 31, 0.85);
+}
+[data-skin='risanka'] .nav-btn,
+[data-skin='risanka'] .bar-btn { box-shadow: 4px 4px 0 var(--chip-shadow); }
+[data-skin='risanka'] .numbered li::before { background: linear-gradient(135deg, var(--a1), var(--a2)); }
+[data-skin='risanka'] .deco { opacity: 0.8; }
+
+/* ------------------------------------------------------------- 5 · Zimska -- */
+
+[data-skin='zima'] {
+  --warm: #4a8fb8;
+  --cold: #2f7fb8;
+  --leader: rgba(87, 114, 136, 0.5);
+  --ink: #26384a;
+  --ink-soft: #577288;
+  --paper: #f7fbfe;
+  --paper-warm: #eaf4fc;
+  --paper-edge: #d3e5f2;
+  --curl: 40, 70, 100;
+  --body-bg:
+    radial-gradient(120% 85% at 15% -5%, #dceefb 0%, transparent 55%),
+    radial-gradient(120% 85% at 85% 105%, #c7dff2 0%, transparent 55%),
+    linear-gradient(160deg, #f2f9ff, #dceaf6);
+  --panel-bg: linear-gradient(170deg, #f7fbfe, #e3f0fa);
+  --chip-bg: linear-gradient(140deg, #ffffff, #dceefb);
+  --chip-border: #ffffff;
+  --chip-shadow: rgba(40, 70, 100, 0.2);
+}
+
+[data-skin='zima'] .theme-sun    { --a1: #3f8fb8; --a2: #6cb2cf; }
+[data-skin='zima'] .theme-ice    { --a1: #2f7fb8; --a2: #63c4dd; }
+[data-skin='zima'] .theme-dawn   { --a1: #7a8ec4; --a2: #a9b9dd; }
+[data-skin='zima'] .theme-honey  { --a1: #51869f; --a2: #8aa6c4; }
+[data-skin='zima'] .theme-ember  { --a1: #c06a5a; --a2: #3f8fb8; }
+[data-skin='zima'] .theme-lilac  { --a1: #8a86c4; --a2: #a37fb8; }
+[data-skin='zima'] .theme-meadow { --a1: #4f9b8f; --a2: #86aec4; }
+[data-skin='zima'] .theme-rainbow{ --a1: #5b8fc4; --a2: #8a86c4; }
+[data-skin='zima'] .theme-twins  { --a1: #b07f9b; --a2: #4a8fc0; }
+
+[data-skin='zima'] .deco-sun { color: #bcd9ec; }
+[data-skin='zima'] .deco-flower { color: #9fc4de; }
+[data-skin='zima'] .deco-flake { opacity: 0.75; }
+[data-skin='zima'] .mote { --m: #ffffff !important; }
+/* Snow falls instead of embers rising. */
+[data-skin='zima'] .mote { top: -5vh; bottom: auto; animation-name: snow-down; }
+
+@keyframes snow-down {
+  0% { transform: translateY(0) scale(0.7); opacity: 0; }
+  12% { opacity: 0.95; }
+  85% { opacity: 0.7; }
+  100% { transform: translateY(108vh) scale(1); opacity: 0; }
+}
+
+/* ----------------------------------------------------------- 6 · Sladoled -- */
+
+[data-skin='sladoled'] {
+  --warm: #ef8aae;
+  --cold: #5fc2c4;
+  --leader: rgba(138, 110, 144, 0.45);
+  --ink: #4a3350;
+  --ink-soft: #8a6e90;
+  --paper: #fffafd;
+  --paper-warm: #ffeef6;
+  --paper-edge: #f3dcea;
+  --round: clamp(22px, 3.8vw, 46px);
+  --curl: 120, 70, 120;
+  --body-bg:
+    radial-gradient(120% 85% at 12% -8%, #ffd9ec 0%, transparent 55%),
+    radial-gradient(120% 85% at 88% 108%, #cdf3ea 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 45%, #fff4fb 0%, #f1e6fb 100%);
+  --panel-bg: linear-gradient(170deg, #fff2f9, #eef6fb 60%, #f3ecfd);
+  --chip-bg: linear-gradient(140deg, #ffd9ec, #fff6fb 55%, #cdf3ea);
+  --chip-border: #fff;
+  --chip-shadow: rgba(150, 90, 150, 0.2);
+}
+
+[data-skin='sladoled'] .theme-sun    { --a1: #f2a65a; --a2: #f08cae; }
+[data-skin='sladoled'] .theme-ice    { --a1: #5fc2c4; --a2: #8ab6e8; }
+[data-skin='sladoled'] .theme-dawn   { --a1: #f08cae; --a2: #f2b98a; }
+[data-skin='sladoled'] .theme-honey  { --a1: #e8a85c; --a2: #c48ad8; }
+[data-skin='sladoled'] .theme-ember  { --a1: #ef8a7a; --a2: #7fb6e8; }
+[data-skin='sladoled'] .theme-lilac  { --a1: #b48ae8; --a2: #ef8ccd; }
+[data-skin='sladoled'] .theme-meadow { --a1: #6ec08a; --a2: #e8c45c; }
+[data-skin='sladoled'] .theme-rainbow{ --a1: #f09a7a; --a2: #9a9ae8; }
+[data-skin='sladoled'] .theme-twins  { --a1: #f08cae; --a2: #7fc4e8; }
+
+[data-skin='sladoled'] .illo { border-radius: 42% 58% 46% 54% / 50% 44% 56% 50%; }
+[data-skin='sladoled'] .page-cover,
+[data-skin='sladoled'] .page-end {
+  background:
+    radial-gradient(85% 60% at 18% 8%, rgba(240, 140, 174, 0.3), transparent 62%),
+    radial-gradient(85% 60% at 86% 94%, rgba(95, 194, 196, 0.3), transparent 62%),
+    var(--paper-warm);
+}
+
+/* ======================================================================== *
+ * The wilder half. These go past re-colouring: ruled paper, pasted scraps,
+ * comic panels, crayon wobble and neon. Anything that tilts uses the
+ * independent `rotate` property, so it never fights the reveal animation or
+ * the illustration hover, which both animate `transform`.
+ * ======================================================================== */
+
+/* ------------------------------------------------------- 7 · Šolski zvezek -- */
+
+[data-skin='zvezek'] {
+  --warm: #d4574a;
+  --cold: #2f6fb8;
+  --leader: rgba(47, 111, 184, 0.35);
+  --font-display: Caveat, 'Bradley Hand', cursive;
+  --font-body: Caveat, 'Bradley Hand', cursive;
+  --ink: #23395e;
+  --ink-soft: #4b5d7d;
+  --paper: #fdfeff;
+  --paper-warm: #f4f8ff;
+  --paper-edge: #cfdcee;
+  --round: clamp(3px, 0.6vw, 7px);
+  --curl: 60, 85, 120;
+  --body-bg:
+    radial-gradient(120% 85% at 15% 0%, #dbe7f6 0%, transparent 55%),
+    linear-gradient(160deg, #e9f0f9, #d8e4f2);
+  --panel-bg: linear-gradient(170deg, #fdfeff, #eef4fc);
+  --chip-bg: linear-gradient(140deg, #ffffff, #e6eefa);
+  --chip-border: #ffffff;
+  --chip-shadow: rgba(60, 85, 120, 0.2);
+  --sky-opacity: 0.35;
+}
+
+[data-skin='zvezek'] .theme-sun    { --a1: #d4812a; --a2: #c2562f; }
+[data-skin='zvezek'] .theme-ice    { --a1: #2f6fb8; --a2: #3f93b8; }
+[data-skin='zvezek'] .theme-dawn   { --a1: #c2496a; --a2: #c2862f; }
+[data-skin='zvezek'] .theme-honey  { --a1: #c2772a; --a2: #8a4f9b; }
+[data-skin='zvezek'] .theme-ember  { --a1: #c23f2f; --a2: #2f6fb8; }
+[data-skin='zvezek'] .theme-lilac  { --a1: #6f4fc2; --a2: #b04f9b; }
+[data-skin='zvezek'] .theme-meadow { --a1: #3f8a4f; --a2: #a8882a; }
+[data-skin='zvezek'] .theme-rainbow{ --a1: #c2662f; --a2: #4f5fc2; }
+[data-skin='zvezek'] .theme-twins  { --a1: #c2496a; --a2: #2f8ab8; }
+
+/* Ruled paper with a margin line down the gutter side. */
+[data-skin='zvezek'] .page {
+  font-size: calc(var(--page-w) / 21 * var(--fit, 1));
+  line-height: 1.45;
+  background-image:
+    repeating-linear-gradient(
+      transparent 0,
+      transparent calc(1.45em - 1px),
+      rgba(47, 111, 184, 0.16) calc(1.45em - 1px),
+      rgba(47, 111, 184, 0.16) 1.45em
+    );
+  background-position: 0 0.4em;
+}
+
+[data-skin='zvezek'] .face-front .page::after,
+[data-skin='zvezek'] .face-back .page::after {
+  background: none;
+  border-left: 2px solid rgba(212, 87, 74, 0.45);
+  inset: 0 auto 0 7%;
+  width: 0;
+}
+
+[data-skin='zvezek'] .page-title { rotate: -1.1deg; font-size: 2.6em; }
+[data-skin='zvezek'] .page-subtitle { rotate: 0.6deg; font-style: normal; }
+[data-skin='zvezek'] .para { text-align: left; }
+[data-skin='zvezek'] .lead::first-letter { font-size: 2.2em; }
+[data-skin='zvezek'] .illo {
+  border-radius: 4px;
+  rotate: -0.8deg;
+  border: 2px solid rgba(35, 57, 94, 0.25);
+  box-shadow: 3px 3px 0 rgba(35, 57, 94, 0.1);
+}
+[data-skin='zvezek'] .illo:hover { transform: rotate(0.4deg) scale(1.02); }
+[data-skin='zvezek'] .folio { font-weight: 700; }
+[data-skin='zvezek'] .deco-flower { color: #d4574a; }
+
+/* ---------------------------------------------------------- 8 · Izrezanka -- */
+
+[data-skin='kolaz'] {
+  --warm: #c96a2e;
+  --cold: #3f7f96;
+  --leader: rgba(90, 70, 50, 0.4);
+  --font-display: Caveat, 'Bradley Hand', cursive;
+  --ink: #3a2e24;
+  --ink-soft: #66513d;
+  --paper: #efe3cf;
+  --paper-warm: #e8d8bd;
+  --paper-edge: #d6c3a4;
+  --round: clamp(6px, 1vw, 12px);
+  --curl: 90, 68, 44;
+  --body-bg:
+    radial-gradient(110% 80% at 18% 0%, #e2cba6 0%, transparent 58%),
+    radial-gradient(110% 80% at 82% 100%, #cfdcd4 0%, transparent 58%),
+    linear-gradient(160deg, #ddcbb0, #c9b79c);
+  --panel-bg: linear-gradient(170deg, #efe3cf, #ddcbb0);
+  --chip-bg: linear-gradient(140deg, #fff8ea, #e8d8bd);
+  --chip-border: #fff8ea;
+  --chip-shadow: rgba(90, 68, 44, 0.3);
+}
+
+[data-skin='kolaz'] .theme-sun    { --a1: #d4802a; --a2: #c2552e; }
+[data-skin='kolaz'] .theme-ice    { --a1: #3f7f96; --a2: #5fa0a8; }
+[data-skin='kolaz'] .theme-dawn   { --a1: #c25a68; --a2: #c2892f; }
+[data-skin='kolaz'] .theme-honey  { --a1: #c2802a; --a2: #96588a; }
+[data-skin='kolaz'] .theme-ember  { --a1: #c2492e; --a2: #3f7f96; }
+[data-skin='kolaz'] .theme-lilac  { --a1: #7a5f9b; --a2: #a85f8a; }
+[data-skin='kolaz'] .theme-meadow { --a1: #4f8a52; --a2: #a8882a; }
+[data-skin='kolaz'] .theme-rainbow{ --a1: #c2662f; --a2: #5f6f9b; }
+[data-skin='kolaz'] .theme-twins  { --a1: #c25a68; --a2: #3f8a9b; }
+
+/* Every block is a scrap of paper, pasted a little crooked. */
+[data-skin='kolaz'] .page-body > * {
+  position: relative;
+  padding: 0.5em 0.7em;
+  margin-bottom: 0.6em;
+  background: #fffaf0;
+  box-shadow: 2px 3px 0 rgba(90, 68, 44, 0.18);
+}
+
+[data-skin='kolaz'] .page-body > *:nth-child(odd) { rotate: -0.7deg; }
+[data-skin='kolaz'] .page-body > *:nth-child(even) { rotate: 0.6deg; }
+[data-skin='kolaz'] .page-body > *:nth-child(3n) { rotate: -0.3deg; background: #fdf3e2; }
+
+[data-skin='kolaz'] .page-title {
+  background: #fff3d8;
+  rotate: -1.4deg;
+  box-shadow: 3px 4px 0 rgba(90, 68, 44, 0.22);
+  /* The base title clips its gradient to the glyphs; a scrap needs real ink,
+     and the ink is pulled towards --ink so pale accents still read. */
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: color-mix(in oklab, var(--a1) 58%, var(--ink));
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Washi tape across the top of each illustration. */
+[data-skin='kolaz'] .illo {
+  overflow: visible;
+  border-radius: 2px;
+  rotate: 1.2deg;
+  padding: 0.5em;
+  background: #fffaf0;
+  box-shadow: 3px 4px 0 rgba(90, 68, 44, 0.22);
+}
+
+/* Room for the tape when the art is the first thing on the page. */
+[data-skin='kolaz'] .page-body > .illo:first-child { margin-top: 0.9em; }
+
+[data-skin='kolaz'] .illo img,
+[data-skin='kolaz'] .illo-slot { border-radius: 2px; }
+
+[data-skin='kolaz'] .illo::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: -0.45em;
+  left: 50%;
+  width: 4.5em;
+  height: 1.3em;
+  rotate: -4deg;
+  translate: -50% 0;
+  background: rgba(255, 226, 150, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(200, 160, 70, 0.35);
+}
+
+/* The base hover tilt is -1.2deg; these skins already sit at an angle, so the
+   hover has to clear their own `rotate` to read as a nudge. */
+[data-skin='kolaz'] .illo:hover { transform: rotate(-2.6deg) scale(1.03); }
+
+[data-skin='kolaz'] .page { padding-inline: calc(var(--page-w) * 0.085); }
+
+/* -------------------------------------------------------------- 9 · Strip -- */
+
+[data-skin='strip'] {
+  --warm: #e0452f;
+  --cold: #1f6fc4;
+  --leader: rgba(26, 24, 22, 0.45);
+  --ink: #1a1816;
+  --ink-soft: #54504c;
+  --paper: #fffdf4;
+  --paper-warm: #fff4cf;
+  --paper-edge: #1a1816;
+  --round: clamp(2px, 0.5vw, 6px);
+  --curl: 26, 24, 22;
+  --body-bg:
+    radial-gradient(circle at 50% 50%, rgba(26, 24, 22, 0.12) 1.5px, transparent 1.6px) 0 0 / 10px 10px,
+    radial-gradient(110% 80% at 15% 0%, #ffd94a 0%, transparent 55%),
+    linear-gradient(160deg, #ffe9a0, #9fd3f0);
+  --panel-bg: linear-gradient(170deg, #fffdf4, #ffe9a0);
+  --chip-bg: linear-gradient(140deg, #ffd94a, #fff3b8);
+  --chip-border: #1a1816;
+  --chip-shadow: rgba(26, 24, 22, 0.4);
+}
+
+[data-skin='strip'] .theme-sun    { --a1: #e07a00; --a2: #e0452f; }
+[data-skin='strip'] .theme-ice    { --a1: #1f6fc4; --a2: #0f9bb8; }
+[data-skin='strip'] .theme-dawn   { --a1: #d4336b; --a2: #e07a00; }
+[data-skin='strip'] .theme-honey  { --a1: #d4740f; --a2: #8f2f9b; }
+[data-skin='strip'] .theme-ember  { --a1: #e0452f; --a2: #1f6fc4; }
+[data-skin='strip'] .theme-lilac  { --a1: #6f2fc4; --a2: #c42f9b; }
+[data-skin='strip'] .theme-meadow { --a1: #2f8f3f; --a2: #c49b00; }
+[data-skin='strip'] .theme-rainbow{ --a1: #e0662f; --a2: #3f3fc4; }
+[data-skin='strip'] .theme-twins  { --a1: #d4336b; --a2: #1f6fc4; }
+
+/* Halftone dots on the paper, every block inked as a panel. */
+[data-skin='strip'] .page {
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(26, 24, 22, 0.09) 1.2px, transparent 1.3px);
+  background-size: 7px 7px;
+}
+
+[data-skin='strip'] .page::after { display: none; }
+
+[data-skin='strip'] .page-body > * {
+  padding: 0.5em 0.7em;
+  margin-bottom: 0.55em;
+  background: #fffdf4;
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+[data-skin='strip'] .page-title {
+  rotate: -1.6deg;
+  padding: 0.25em 0.45em;
+  background: color-mix(in oklab, var(--a1) 72%, #2b1206);
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 5px 5px 0 var(--ink);
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #fff3b8;
+  -webkit-text-fill-color: currentColor;
+  text-shadow: 3px 3px 0 var(--ink);
+  letter-spacing: 0.01em;
+}
+
+/* The ink block is the flourish; the wave would fight it. */
+[data-skin='strip'] .page-opener .page-title::after { display: none; }
+
+[data-skin='strip'] .page-subtitle { background: var(--paper-warm); font-style: normal; }
+[data-skin='strip'] .running-head { color: var(--ink); }
+[data-skin='strip'] .folio {
+  border: 3px solid var(--ink);
+  background: #fff3b8;
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+[data-skin='strip'] .illo {
+  border-radius: 4px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  rotate: -0.6deg;
+}
+
+[data-skin='strip'] .face { box-shadow: inset 0 0 0 3px var(--ink); }
+[data-skin='strip'] .book { filter: drop-shadow(10px 10px 0 rgba(26, 24, 22, 0.8)); }
+[data-skin='strip'] .numbered li::before { border: 2px solid var(--ink); }
+
+/* --------------------------------------------------------- 10 · Voščenke -- */
+
+[data-skin='voscenke'] {
+  --warm: #e06a2f;
+  --cold: #2f7fc4;
+  --leader: rgba(80, 60, 40, 0.4);
+  --font-display: Caveat, 'Bradley Hand', cursive;
+  --ink: #40352c;
+  --ink-soft: #695643;
+  --paper: #fdf6e6;
+  --paper-warm: #fbecd0;
+  --paper-edge: #e4d3b2;
+  --round: clamp(10px, 2vw, 22px);
+  --curl: 110, 85, 50;
+  --body-bg:
+    radial-gradient(110% 80% at 12% 0%, #ffd9a0 0%, transparent 55%),
+    radial-gradient(110% 80% at 88% 100%, #b8e0c4 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 50%, #fff3dd 0%, #f2e3c4 100%);
+  --panel-bg: linear-gradient(170deg, #fdf6e6, #f6e6c8);
+  --chip-bg: linear-gradient(140deg, #ffd9a0, #fff3dd);
+  --chip-border: #fffaf0;
+  --chip-shadow: rgba(110, 85, 50, 0.26);
+}
+
+[data-skin='voscenke'] .theme-sun    { --a1: #e8941f; --a2: #e0532f; }
+[data-skin='voscenke'] .theme-ice    { --a1: #2f7fc4; --a2: #2fb0c4; }
+[data-skin='voscenke'] .theme-dawn   { --a1: #e0497a; --a2: #e8941f; }
+[data-skin='voscenke'] .theme-honey  { --a1: #e08a1f; --a2: #a04fb0; }
+[data-skin='voscenke'] .theme-ember  { --a1: #e0452f; --a2: #2f7fc4; }
+[data-skin='voscenke'] .theme-lilac  { --a1: #8a4fd0; --a2: #d04fb0; }
+[data-skin='voscenke'] .theme-meadow { --a1: #4fa040; --a2: #d0a020; }
+[data-skin='voscenke'] .theme-rainbow{ --a1: #e0752f; --a2: #5f5fd0; }
+[data-skin='voscenke'] .theme-twins  { --a1: #e0497a; --a2: #2f9bc4; }
+
+[data-skin='voscenke'] .page {
+  font-size: calc(var(--page-w) / 22 * var(--fit, 1));
+  line-height: 1.5;
+}
+
+[data-skin='voscenke'] .page-title { rotate: -1.8deg; font-size: 2.7em; }
+[data-skin='voscenke'] .page-subtitle { rotate: 1deg; font-style: normal; }
+[data-skin='voscenke'] .page-body > .para:nth-child(odd) { rotate: -0.7deg; }
+[data-skin='voscenke'] .page-body > .para:nth-child(even) { rotate: 0.6deg; }
+[data-skin='voscenke'] .page-body > .numbered { rotate: -0.5deg; }
+
+/* Wobbly crayon frame. */
+[data-skin='voscenke'] .illo {
+  border-radius: 62% 38% 55% 45% / 45% 58% 42% 55%;
+  rotate: -1.5deg;
+  border: 4px solid color-mix(in oklab, var(--a1) 70%, transparent);
+  box-shadow: none;
+}
+
+[data-skin='voscenke'] .illo:hover { transform: rotate(0.6deg) scale(1.03); }
+[data-skin='voscenke'] .illo-slot { border-width: 0; }
+[data-skin='voscenke'] .numbered li::before { border-radius: 58% 42% 50% 50% / 46% 54% 44% 56%; }
+[data-skin='voscenke'] .page { padding-inline: calc(var(--page-w) * 0.085); }
+
+/* ------------------------------------------------------------- 11 · Disko -- */
+
+[data-skin='disko'] {
+  color-scheme: dark;
+  --warm: #ff4fd8;
+  --cold: #4fe8ff;
+  --leader: rgba(140, 200, 255, 0.35);
+  --ink: #eaf6ff;
+  --ink-soft: #9fb8d8;
+  --paper: #140d24;
+  --paper-warm: #1b1030;
+  --paper-edge: #3b2a5e;
+  --round: clamp(14px, 2.6vw, 30px);
+  --curl: 4, 2, 12;
+  --body-bg:
+    radial-gradient(110% 80% at 15% 0%, #4a1070 0%, transparent 55%),
+    radial-gradient(110% 80% at 85% 100%, #063a63 0%, transparent 55%),
+    linear-gradient(160deg, #130a24, #070a1c);
+  --panel-bg: linear-gradient(170deg, #1d1236, #0c1430);
+  --chip-bg: linear-gradient(140deg, #43215e, #123a5e);
+  --chip-border: rgba(255, 255, 255, 0.3);
+  --chip-shadow: rgba(255, 79, 216, 0.35);
+  --sky-opacity: 0.7;
+}
+
+[data-skin='disko'] .blob { opacity: 0.3; }
+
+[data-skin='disko'] .theme-sun    { --a1: #ffd24f; --a2: #ff7a4f; }
+[data-skin='disko'] .theme-ice    { --a1: #4fe8ff; --a2: #7a9fff; }
+[data-skin='disko'] .theme-dawn   { --a1: #ff4fd8; --a2: #ffb04f; }
+[data-skin='disko'] .theme-honey  { --a1: #ffc14f; --a2: #e24fff; }
+[data-skin='disko'] .theme-ember  { --a1: #ff6a4f; --a2: #4fc4ff; }
+[data-skin='disko'] .theme-lilac  { --a1: #b14fff; --a2: #ff4fb1; }
+[data-skin='disko'] .theme-meadow { --a1: #4fffa8; --a2: #d8ff4f; }
+[data-skin='disko'] .theme-rainbow{ --a1: #ff9a4f; --a2: #8a7aff; }
+[data-skin='disko'] .theme-twins  { --a1: #ff4f9a; --a2: #4fc4ff; }
+
+[data-skin='disko'] .page {
+  background-image:
+    linear-gradient(rgba(120, 200, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 120, 220, 0.06) 1px, transparent 1px);
+  background-size: 100% 2.2em, 2.2em 100%;
+}
+
+/* `.page.reveal .page-body > *` (0,3,0) owns `animation` on this element, so
+   the pulse has to be declared alongside rise-in, at higher specificity. */
+[data-skin='disko'] .page-title {
+  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--a1) 60%, transparent));
+  animation: neon-pulse 3.2s ease-in-out infinite;
+}
+
+[data-skin='disko'] .page.reveal .page-title {
+  animation:
+    rise-in 560ms cubic-bezier(0.22, 1.05, 0.32, 1) backwards,
+    neon-pulse 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * 75ms), 0s;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px color-mix(in oklab, var(--a1) 45%, transparent)); }
+  50% { filter: drop-shadow(0 0 18px color-mix(in oklab, var(--a2) 70%, transparent)); }
+}
+
+[data-skin='disko'] .illo {
+  border-radius: 18px;
+  border: 1px solid color-mix(in oklab, var(--a2) 55%, transparent);
+  box-shadow:
+    0 0 20px color-mix(in oklab, var(--a1) 35%, transparent),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+[data-skin='disko'] .illo img { filter: saturate(1.25) contrast(1.05); }
+[data-skin='disko'] .numbered li::before {
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+  color: #140d24;
+  box-shadow: 0 0 12px color-mix(in oklab, var(--a1) 55%, transparent);
+}
+[data-skin='disko'] .face-shade {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 9%,
+    transparent 26%,
+    transparent 84%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+[data-skin='disko'] .deco-sun { color: #ff4fd8; opacity: 0.4; }
+[data-skin='disko'] .deco-flake { color: #4fe8ff; opacity: 0.5; }
+[data-skin='disko'] .deco-flower { color: #b14fff; }
+[data-skin='disko'] .deco-cloud { color: #1d1236; opacity: 0.7; }
+[data-skin='disko'] .mote { --m: #ff4fd8 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-skin='disko'] .page-title,
+  [data-skin='disko'] .page.reveal .page-title { animation: none; }
+}
+
+/* Tilted blocks poke past the text column by a pixel or two, and the page body
+   clips at its padding box — so the tilting skins get that room back. */
+[data-skin='zvezek'] .page-body,
+[data-skin='kolaz'] .page-body,
+[data-skin='strip'] .page-body,
+[data-skin='voscenke'] .page-body {
+  padding: 6px 7px;
+}
