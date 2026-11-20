@@ -436,6 +436,10 @@ body {
 }
 
 .leaf.flipped { transform: rotateY(-180deg); }
+
+/* Everything but the spread in view and its neighbours is out of the render
+   tree. 68 pages of gradients and type is more than a phone should carry. */
+.leaf:not(.near) { display: none; }
 .leaf.no-anim { transition: none; }
 
 .face {
@@ -1085,15 +1089,23 @@ body {
   .deco-sun, .deco-flake { opacity: 0.35; }
   .deco-flower, .deco-cloud { display: none; }
 
-  /* A phone has better things to do than drift three blurred blobs and five
-     motes behind a page turn. */
+  /* A phone has better things to do than drift blurred blobs behind a page
+     turn, blur what is under the drawer, or keep a layer per title. */
   .blob {
     animation: none;
-    filter: blur(28px);
+    filter: none;
+    opacity: 0.35;
   }
 
   .blob-mid,
   .mote { display: none; }
+
+  .toc-panel { backdrop-filter: none; }
+
+  .page-title { will-change: auto; }
+
+  /* The page changes outright here, so nothing should be mid-flight. */
+  .leaf { transition: none; }
 }
 
 /* svh is the better unit where it exists, but it must not be the only one. */

@@ -32,7 +32,20 @@ All of it is CSS; no animation library is pulled in.
   paper is off the page. The lift widens the crease, deepens the shadow the
   standing sheet casts, brightens the lit edge of the bend and pushes the
   drop-shadow out — all strongest halfway through, when the sheet is upright.
-  The whole thing is built for a phone, which is where it gets expensive.
+  **A handset does not fold at all.** Below 900px the page simply changes, the
+  tap lands at once with no hold, and the staggered entrance carries the
+  transition. The fold is a desktop luxury: two animated `clip-path`s and a
+  moving crease over a stack of pages is more than a phone will give you at
+  60fps, and a turn that stutters is worse than one that doesn't animate. The
+  sky also stops moving there, the drawer drops its `backdrop-filter`, and the
+  titles give up their layers.
+
+  Whatever the size, only the spread in view and its two neighbours are in the
+  render tree (`.leaf:not(.near) { display: none }`). All 68 pages stay in the
+  DOM — they are needed for the contents, the fit pass and the page numbers —
+  but a phone should not pay to render 68 pages of gradients and type.
+
+  On a desktop, where the fold does run:
   `--fold` is set on the folding leaf and on the fold layer, never on `#book`:
   it inherits, so a value changing on the book restyles all 68 pages on every
   frame of the turn, where this way it reaches about thirty elements. The

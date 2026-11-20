@@ -179,6 +179,8 @@ const skinSelect = document.querySelector<HTMLSelectElement>('#skin')!;
 const FLIP_MS = 620;
 
 const stillness = window.matchMedia('(prefers-reduced-motion: reduce)');
+/** A handset cannot afford the fold: it turns pages outright. */
+const handset = window.matchMedia('(max-width: 899px)');
 
 let mode: Mode = modeForWidth();
 /** Number of leaves already turned. */
@@ -328,6 +330,18 @@ function reveal(delayMs: number): void {
   }
 }
 
+/**
+ * Keeps all but a handful of leaves out of the render tree. Every page is in
+ * the DOM — 68 of them, each a full page of gradients and type — and a phone
+ * pays for that on every frame it paints. Only the spread in view and its
+ * immediate neighbours can ever be seen.
+ */
+const NEAR = 2;
+
+function windowLeaves(): void {
+  leaves.forEach((leaf, i) => leaf.classList.toggle('near', Math.abs(i - flipped) <= NEAR));
+}
+
 function applyZ(): void {
   const total = leaves.length;
   leaves.forEach((leaf, i) => {
@@ -340,6 +354,7 @@ function update(animate = true): void {
     leaf.classList.toggle('no-anim', !animate);
     leaf.classList.toggle('flipped', i < flipped);
   });
+  windowLeaves();
   applyZ();
   const total = leaves.length;
   if (!animate) {
@@ -357,6 +372,7 @@ function update(animate = true): void {
   fitFaces(visibleFaces());
   if (!foldLayer.classList.contains('folding')) reveal(0);
 
+
   const left = mode === 'spread' ? pages[flipped * 2 - 1] : undefined;
   const right = mode === 'spread' ? pages[flipped * 2] : pages[flipped];
   const shown = [left?.folio, right?.folio].filter((n): n is number => !!n);
@@ -371,7 +387,7 @@ function update(animate = true): void {
  * nothing animates back.
  */
 function fold(leaf: HTMLElement | null, direction: 'forward' | 'back'): void {
-  if (!leaf || stillness.matches) return;
+  if (!leaf || stillness.matches || handset.matches) return;
   // Either way it is the back of the sheet that lies folded over; only the
   // direction the crease travels changes.
   const flap = leaf.querySelector<HTMLElement>('.face-back');
@@ -416,8 +432,9 @@ function turn(delta: number): void {
   const leaf = leaves[delta > 0 ? flipped : next] ?? null;
   flipped = next;
 
-  if (stillness.matches) {
-    // Nothing is in flight, so there is nothing to wait for or lift.
+  if (stillness.matches || handset.matches) {
+    // Nothing is in flight, so there is nothing to wait for or lift — and the
+    // tap should land at once rather than behind a hold.
     lifting = null;
     update(false);
     return;
