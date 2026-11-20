@@ -548,8 +548,8 @@ body {
 .fold-edge {
   --edge-w: calc(10px + var(--fold-lift) * 34px);
   position: absolute;
-  top: -3.5%;
-  bottom: -3.5%;
+  top: 0;
+  bottom: 0;
   left: calc((var(--fold) * 2 - 1) * 100%);
   width: var(--edge-w);
   margin-left: calc(var(--edge-w) * -1);
@@ -565,10 +565,10 @@ body {
 .fold-crease {
   --crease-w: calc(18px + var(--fold-lift) * 60px);
   position: absolute;
-  /* Runs the full height and past both edges, the way a bent sheet's shadow
-     spills over the top and bottom of the page. */
-  top: -3.5%;
-  bottom: -3.5%;
+  /* Full height of the page, edge to edge — and no further: past the paper
+     there is nothing for a crease to fall on. */
+  top: 0;
+  bottom: 0;
   left: calc(var(--fold) * 100%);
   width: var(--crease-w);
   margin-left: calc(var(--crease-w) * -0.62);
