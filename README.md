@@ -116,15 +116,24 @@ Every illustration is a slot in `src/content.ts`:
 { type: 'illo', id: 'lonec', alt: 'Mavrični lonec na vrtu', ratio: 1.2 }
 ```
 
-Without `src` it renders as a dashed placeholder showing the id and the
-description. Drop the artwork into `illustrations/` and add the path:
+Without `src` it renders as a wash of the chapter's colours showing the id and
+the description. Drop the artwork into `illustrations/` and add the path:
 
 ```ts
 { type: 'illo', id: 'lonec', alt: '…', src: 'illustrations/lonec.webp', ratio: 1.2 }
 ```
 
-`ratio` is width ÷ height. Art is capped at 42% of the page height and cropped
-(`object-fit: cover`) so it can never push the text off the page.
+Art is a **plate**, the way a picture book sets it: it sits below the words, it
+takes whatever height they leave (never less than a third of the page), and it
+bleeds past the margins to the left, right and bottom edges of the paper — so a
+pair of plates runs on across the gutter as one panorama. Its top edge is
+feathered into the paper with a mask, the page number sits on it, and the art
+itself is cropped (`object-fit: cover`) rather than letterboxed, so it can never
+push the text off the page.
+
+`ratio` is width ÷ height. A plate ignores it — the space it gets decides its
+shape — but the four skins that keep art in a frame (`zvezek`, `kolaz`, `strip`,
+`voscenke`) still honour it, so it is worth setting.
 
 ## Looks
 
@@ -165,7 +174,8 @@ Two rules when writing a wilder one:
 Every chapter carries a `theme` (`sun`, `ice`, `dawn`, `honey`, `ember`,
 `lilac`, `meadow`, `rainbow`, `twins`). The theme sets `--a1` / `--a2` on that
 chapter's pages, which drive the title gradient, the wave under a chapter
-opener, the drop cap, list bullets, page tint, illustration frame and folio —
+opener, the drop cap, list bullets, page tint, the unpainted plate and the
+folio —
 so each story has its own mood without touching the markup. Add or change one
 in the `.theme-*` block at the top of `styles/book.css`.
 

@@ -609,7 +609,10 @@ body {
   border-radius: inherit;
   display: flex;
   flex-direction: column;
-  padding: calc(var(--page-w) * 0.095) calc(var(--page-w) * 0.1) calc(var(--page-w) * 0.07);
+  --pad-x: calc(var(--page-w) * 0.1);
+  --pad-t: calc(var(--page-w) * 0.095);
+  --pad-b: calc(var(--page-w) * 0.07);
+  padding: var(--pad-t) var(--pad-x) var(--pad-b);
   font-size: calc(var(--page-w) / 25 * var(--fit, 1));
   line-height: 1.6;
   background-image:
@@ -631,7 +634,19 @@ body {
   z-index: 1;
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  /* The art reaches the paper's edges, so the body does too — the words stay
+     inside on the body's own padding. Keeping the bleed here, and not on a
+     negative bottom margin under the art, is what lets `fitFaces` read an
+     honest scrollHeight: a plate hanging past the body would read as overflow
+     for ever, and the fitter would shrink the type to its floor. */
+  margin: 0 calc(-1 * var(--pad-x)) calc(-1 * var(--pad-b));
+  padding: 0 var(--pad-x);
 }
+
+/* The words keep their own height; only the art gives and takes. */
+.page-body > :not(.illo) { flex: 0 0 auto; }
 
 .running-head {
   flex: 0 0 auto;
@@ -656,15 +671,18 @@ body {
 }
 
 .folio {
-  flex: 0 0 auto;
-  align-self: center;
-  margin-top: 0.7em;
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--pad-b) * 0.34);
+  transform: translateX(-50%);
+  z-index: 2;
   padding: 0.12em 0.9em;
   border-radius: 999px;
   font-size: 0.66em;
   font-weight: 700;
   color: color-mix(in oklab, var(--a1) 38%, var(--ink));
-  background: color-mix(in oklab, var(--a1) 15%, transparent);
+  /* It stands on the art now, so it brings a little paper with it. */
+  background: color-mix(in oklab, var(--a1) 17%, var(--paper));
 }
 
 .page-title {
@@ -715,7 +733,7 @@ body {
   color: var(--ink-soft);
 }
 
-.page-body > :first-child { margin-top: 0; }
+.page-body > :first-child:not(.illo) { margin-top: 0; }
 
 .para {
   margin: 0 0 0.8em;
@@ -769,28 +787,31 @@ body {
   box-shadow: 0 3px 8px color-mix(in oklab, var(--a1) 35%, transparent);
 }
 
-/* ---------------------------------------------------------- illustration -- */
+/* ---------------------------------------------------------- illustration --
+ *
+ * A picture-book plate, not a framed picture: the painting owns the lower part
+ * of the page, bleeds past the margins to three edges of the paper, and runs
+ * on across the gutter so a spread reads as one panorama. The words sit above
+ * it in the open air, and the plate's top edge is feathered so the paint fades
+ * into the paper instead of stopping on a ruled line.
+ */
 
 .illo {
   position: relative;
-  margin: 1em auto;
-  aspect-ratio: var(--ratio);
-  /* Never let art push the words off the page; it shrinks and crops instead. */
-  max-height: calc(42% * var(--fit, 1));
-  width: 100%;
-  border-radius: 16% 28% 18% 30% / 26% 18% 30% 20%;
+  /* Out past the body's own padding, to the edge of the paper. */
+  margin: 1.1em calc(-1 * var(--pad-x)) 0;
+  /* However much height the words leave, down to a plate's worth. */
+  flex: 1 1 auto;
+  min-height: calc(32% * var(--fit, 1));
+  /* Whatever the block order, the art is the ground the page stands on. */
+  order: 1;
   background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--a1) 22%, transparent),
-    color-mix(in oklab, var(--a2) 22%, transparent)
+    168deg,
+    color-mix(in oklab, var(--a1) 26%, transparent),
+    color-mix(in oklab, var(--a2) 26%, transparent)
   );
-  box-shadow: 0 10px 24px color-mix(in oklab, var(--a1) 18%, transparent);
-  transition: transform 0.5s cubic-bezier(0.34, 1.5, 0.5, 1), border-radius 0.6s ease;
-}
-
-.illo:hover {
-  transform: rotate(-1.2deg) scale(1.02);
-  border-radius: 28% 16% 30% 18% / 18% 28% 20% 30%;
+  -webkit-mask: linear-gradient(180deg, transparent, #000 14%);
+  mask: linear-gradient(180deg, transparent, #000 14%);
 }
 
 .illo img {
@@ -798,25 +819,22 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  /* The frame no longer clips, so the art carries the frame's shape. */
-  border-radius: inherit;
 }
 
+/* An unpainted plate: a wash of the chapter's colours with the brief on it. */
 .illo-slot {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.35em;
-  padding: 1em 1.6em;
+  justify-content: flex-end;
+  gap: 0.3em;
+  padding: 1em 1.6em calc(var(--pad-b) + 1em);
   text-align: center;
-  border: 2px dashed color-mix(in oklab, var(--a1) 45%, transparent);
-  border-radius: inherit;
 }
 
 .illo-slot::before {
-  content: '✿';
+  content: '\273F';
   font-size: 1.4em;
   color: color-mix(in oklab, var(--a1) 70%, transparent);
 }
@@ -858,6 +876,54 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  /* These pages centre their words, so they keep the plain page box. */
+  margin: 0;
+  padding: 0;
+}
+
+/* On the cover the plate is the whole page and the title stands on it. The
+   selector reaches through `.page-body >` so it outranks the skins that give
+   every block on the page a frame. */
+.page-cover .page-body > .illo {
+  position: absolute;
+  inset: calc(-1 * var(--pad-t)) calc(-1 * var(--pad-x)) calc(-1 * var(--pad-b));
+  margin: 0;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  /* Re-stated, so a skin that paints every block does not paint this one. */
+  background: linear-gradient(
+    168deg,
+    color-mix(in oklab, var(--a1) 26%, transparent),
+    color-mix(in oklab, var(--a2) 26%, transparent)
+  );
+  box-shadow: none;
+  rotate: none;
+  -webkit-mask: none;
+  mask: none;
+}
+
+/* Enough paper over the paint to keep the lettering readable. */
+.page-cover .page-body > .illo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--paper) 56%, transparent),
+    color-mix(in oklab, var(--paper) 14%, transparent) 60%,
+    color-mix(in oklab, var(--paper) 46%, transparent)
+  );
+}
+
+.page-cover .page-title,
+.page-cover .para,
+.page-cover .cover-rule {
+  position: relative;
+  z-index: 1;
 }
 
 .page-cover .page-title,
@@ -1031,16 +1097,26 @@ body {
 /* --------------------------------------------------------------- reveal -- */
 
 .page.reveal .page-body > * {
-  /* `backwards`, not `both`: a filled end state would outrank .illo:hover.
+  /* `backwards`, not `both`: a filled end state would outrank the framed
+     skins' .illo:hover.
      The delay holds the blocks at opacity 0 from the moment the turn starts,
      so a landing page is never briefly painted and then blanked. */
   animation: rise-in 560ms cubic-bezier(0.22, 1.05, 0.32, 1) backwards;
   animation-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * 75ms);
 }
 
+/* A plate touches the paper's edges, so it must not rise or tilt into place —
+   either would show a sliver of paper under it on every turn. It fades. */
+.page.reveal .page-body > .illo { animation-name: fade-in; }
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(14px) rotate(-0.4deg); }
   to { opacity: 1; transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* ------------------------------------------------------- single-page mode -- */
@@ -1112,8 +1188,6 @@ body {
   .page::after { display: none; }
 
   .face-shade { display: none; }
-
-  .illo { box-shadow: none; }
 
   .para,
   .toc-title {
