@@ -515,6 +515,212 @@ export const chapters: Chapter[] = [
       },
     ],
   },
+  {
+    title: 'Prva noč',
+    label: 'Prva noč',
+    theme: 'lilac',
+    pages: [
+      {
+        blocks: [
+          { type: 'h1', text: 'Prva noč' },
+          { type: 'h2', text: 'Kako sta se teta in stric naučila brati vreme' },
+          { type: 'illo', id: 'prva-noc', alt: 'Zibelka med dvema oknoma, eno sončno, eno zasneženo' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Prvi večer z dvojčkoma je bil tih kot sneg. Jara in Jasna sta zaspala v veliki leseni zibelki sredi dnevne sobe, teta in stric pa sta sedela na kavču in ju gledala, kot bi se bala, da bosta izginila, če za hip pogledata stran.' },
+          { type: 'p', text: '»Kaj če se zbudita?« je šepnila teta.' },
+          { type: 'p', text: '»Potem bova tu,« je rekel stric. In ker ni bil človek velikih besed, je bilo to zanj skoraj kot pesem.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Ob polnoči je zajokal Jara. Teta je planila pokonci in storila edino, kar je znala: ogrela je sobo. Radiatorji so zapeli, zavese so se napihnile od toplote, na oknih se je nabrala rosa.' },
+          { type: 'p', text: 'A ko se je Jara pomiril, je zajokala Jasna. Stric je prihitel z druge strani in storil edino, kar je znal: narahlo je pihnil. Po tleh je zaplesal hladen zrak, na šipi je zraslo nekaj ledenih rož.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'In tako je šlo vso noč. Zibelka je potovala iz tropov v tundro in nazaj. Enkrat se je nad njo kadila para, drugič je po robovih tiho pokal led.' },
+          { type: 'p', text: '»Preveč greješ!« je zašepetal stric, ker si sredi noči nista upala vpiti.' },
+          { type: 'p', text: '»Ti pa zmrzuješ najina otroka!« je zašepetala teta nazaj.' },
+          { type: 'illo', id: 'zibelka-vreme', alt: 'Zibelka med paro in ledenimi rožami', ratio: 1.3 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Proti jutru sta utihnila oba — starša, ne otroka. Sedla sta na tla ob zibelki in se zazrla vanjo.' },
+          { type: 'p', text: 'In takrat sta opazila nekaj, česar prej nista. Jara se je pomiril vsakič, ko je bila blizu teta. Jasna pa je zaspala vsakič, ko se je je dotaknil stričev hlad.' },
+          { type: 'p', text: '»Ne potrebujeta istega vremena,« je rekla teta počasi. »Vsak potrebuje svoje.«' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Tisto noč sta prvič naredila to, kar bosta odslej delala vsak dan. Teta je vzela v naročje Jaro, stric pa Jasno. Vsak je svojemu otroku dal točno tisto, kar je potreboval.' },
+          { type: 'p', text: 'V hiši je nastala tišina, kakršne še ni bilo. Ne vroča, ne mrzla. Taka, v kateri lahko vsi štirje zaspijo.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'h2', text: 'Nauk prve noči' },
+          { type: 'p', text: 'Ravnovesje ni to, da vsi dobijo enako. Ravnovesje je to, da vsak dobi tisto, kar potrebuje — in da nekdo opazi, kaj to je.' },
+          { type: 'illo', id: 'stirje-spijo', alt: 'Štirje spijo: teta z Jaro, stric z Jasno', ratio: 1.4 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Velika kopel',
+    label: 'Velika kopel',
+    theme: 'ice',
+    pages: [
+      {
+        blocks: [
+          { type: 'h1', text: 'Velika kopel' },
+          { type: 'p', text: 'Nekega sobotnega večera sta teta in stric sklenila, da je čas za prvo veliko kopel. Pripravila sta mehke brisače, rumeno račko in posodico z mehurčki, ki so dišali po sivki.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Teta je odprla pipo. Iz nje je privrela voda, tako topla, da se je kopalnica v hipu napolnila s paro. Ogledalo je izginilo, zavesa se je zalepila na steno, račka je zaplavala kot po topli reki.' },
+          { type: 'p', text: '»Teta,« je previdno rekel stric, »to ni kopel. To je juha.«' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Stric se je sklonil nad kad in rahlo pihnil. Para je izginila, voda se je umirila — in po robovih kadi je zacvetel tanek, bleščeč led.' },
+          { type: 'p', text: '»Stric,« je enako previdno rekla teta, »to ni kopel. To je drsališče za račko.«' },
+          { type: 'illo', id: 'kopel', alt: 'Kad, na eni strani para, na drugi led, vmes rumena račka', ratio: 1.3 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Petkrat sta ponovila isto. Vroče, mrzlo, vroče, mrzlo. Kopalnica je bila zdaj savna, zdaj ledena jama. Ogledalo se je naveličalo in se kar nehalo rositi.' },
+          { type: 'p', text: 'In takrat se je zgodilo nekaj, česar nobeden od njiju ni pričakoval. Jara in Jasna, ki sta ležala v brisačah na pručki, sta se zasmejala. Prvič. Oba hkrati.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Smejala sta se paru, ki je plesal pod stropom, in ledenim rožam, ki so rasle po robu kadi. Smejala sta se rački, ki se je vozila po lastnem majhnem ledeniku.' },
+          { type: 'p', text: 'Teta in stric sta se spogledala. Potem sta se zasmejala tudi onadva.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'h2', text: 'Komolec ve' },
+          { type: 'p', text: 'Nazadnje sta naredila tisto, kar delajo vsi starši na svetu: vsak je v vodo pomočil komolec. Teta je dodala kapljico toplote, stric kapljico hladu, in ko sta oba prikimala, je bila voda — ravno prav.' },
+          { type: 'p', text: 'Mehurčki so zadišali po sivki. Nekaj jih je ob stiku s stričevim zrakom zmrznilo v drobne snežinke, ki so se počasi usipale nazaj v kad. Jasna jih je lovila z dlanjo. Jara se je grel ob tetini roki.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Tisti večer so vsi štirje dišali po sivki, po pari in po snegu hkrati. In to je bil, kot je kasneje trdila teta, najlepši vonj na svetu.' },
+          { type: 'illo', id: 'mehurcki-snezinke', alt: 'Mehurčki, ki se spreminjajo v snežinke', ratio: 1.3 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Prvi dan v vrtcu',
+    label: 'Prvi dan v vrtcu',
+    theme: 'meadow',
+    pages: [
+      {
+        blocks: [
+          { type: 'h1', text: 'Prvi dan v vrtcu' },
+          { type: 'p', text: 'Prišel je dan, ki se ga je teta bala že od prve noči. Jara in Jasna sta bila dovolj velika za vrtec.' },
+          { type: 'illo', id: 'vrtec', alt: 'Dvojčka pred vrati vrtca, vsak v svoji jopici', ratio: 1.3 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: '»Kaj če ju ne bodo marali?« je vprašala teta, ko sta stala pred vrati. »Kaj če bodo rekli, da sta čudna?«' },
+          { type: 'p', text: '»Sta čudna,« je rekel stric. Teta ga je ostro pogledala. »Čudna sta na najlepši možni način,« je dodal in si popravil šal.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Sprva je bilo točno tako, kot se je teta bala. Ko je Jara prijel za roko fantka s pegami, se je fantku stopila čokolada v žepu. Ko je Jasna zehnila, je mlako na dvorišču prekril tanek led in dve deklici sta zacvilili od strahu.' },
+          { type: 'p', text: 'Otroci so se umaknili in gledali od daleč. Jara in Jasna sta obstala sredi igrišča, čisto sama.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Potem pa je prišel oktober in z njim prvi res mrzel dan. Peskovnik je bil leden, tobogan vlažen, prsti v rokavicah so zebli.' },
+          { type: 'p', text: 'Jara je stopil v peskovnik, se usedel vanj in se stresel. Pesek okoli njega se je v hipu ogrel kot pesek na morju. Otroci so eden za drugim sedli zraven in zarili vanj premražene roke.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'In ko je čez nekaj mesecev prišel prvi res vroč dan in se je asfalt lesketal od vročine, je Jasna pihnila na veliko lužo za ograjo. Nastalo je drsališče, veliko natanko toliko, da je lahko po njem drsalo osem otrok hkrati, če so se držali za roke.' },
+          { type: 'illo', id: 'peskovnik-drsalisce', alt: 'Topel peskovnik in drsališče na istem igrišču', ratio: 1.4 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'h2', text: 'Kar znaš, podari' },
+          { type: 'p', text: 'Od tistega dne nihče v vrtcu ni več govoril, da sta dvojčka čudna. Govorili so, da sta Jara in Jasna najboljša stvar, ki se je kdaj zgodila igrišču.' },
+          { type: 'p', text: 'Teta je tistega večera doma jokala. Od sreče, je rekla, in stric se je delal, da ji verjame, čeprav je vedel, da je jokala tudi malo od olajšanja.' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Ko je zmanjkalo zime',
+    label: 'Ko je zmanjkalo zime',
+    theme: 'ember',
+    pages: [
+      {
+        blocks: [
+          { type: 'h1', text: 'Ko je zmanjkalo zime' },
+          { type: 'p', text: 'Tisto leto zima preprosto ni prišla. December je bil moker in top, januar je dišal po blatu. Na vrtu so se zmedle trobentice in pognale sredi zime, ker niso vedele, da je zima.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Najprej tega ni opazil nihče razen stricu. Potem pa je teta videla, da mu z obrvi ne visijo več ledene svečke. Da je njegov modrikasti nos bled. Da zjutraj na kuhinjskem oknu ni več ledenih rož.' },
+          { type: 'p', text: '»Samo utrujen sem,« je rekel stric in se stresel, čeprav v hiši ni bilo mrzlo. To je bilo najbolj zaskrbljujoče od vsega: stricu je bilo prvič v življenju hladno od znotraj in ne od zunaj.' },
+          { type: 'illo', id: 'bledi-stric', alt: 'HladnoStric brez ledenih svečk, ob oknu brez ledenih rož', ratio: 1.3 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Teta je naredila tisto, kar je znala najbolje. Zavila ga je v odejo, mu skuhala čaj in ga objela. A objem, ki je vedno vse popravil, tokrat ni pomagal. Stric je postajal vsak dan bolj prosojen.' },
+          { type: 'p', text: '»Teta,« je nekega večera rekel čisto potiho, »mislim, da sem ostal brez zime.«' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'h2', text: 'Pot v gore' },
+          { type: 'p', text: 'Naslednje jutro so se odpravili vsi štirje. Teta je spakirala piškote in dve odeji. Jara je nosil termovko. Jasna ni nosila ničesar — ves čas je gledala navzgor, proti vrhovom, kot bi nekaj slišala.' },
+          { type: 'p', text: 'Šli so višje, kot je kdorkoli od njih kdaj šel. Mimo zadnje hiše, mimo zadnjega drevesa, do mesta, kjer se je držal zadnji košček ledenika — majhen, siv in trmast.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Stric je obstal. Ledenik je bil tako majhen, da ga je lahko objel z obema rokama.' },
+          { type: 'p', text: '»Premalo ga je,« je rekel. »Za celo zimo je premalo.«' },
+          { type: 'p', text: 'In takrat je Jasna stopila naprej, položila dlan na led in nanj dihnila — tako, kot je dihala v zibelki, ko je bila še čisto majhna.' },
+          { type: 'illo', id: 'ledenik', alt: 'Družina ob zadnjem koščku ledenika', ratio: 1.4 },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'p', text: 'Led pod njeno dlanjo je zazvenel. Najprej tiho, kot kozarec, nato globoko, kot zvon. Z vrha se je spustil veter, ki ga ni poslala nobena vremenska napoved.' },
+          { type: 'p', text: 'Stričeve obrvi so zacvetele v ledene svečke. Nos mu je spet pomodrel. Zravnal se je, kot se zravna drevo, ko mu z vej pade sneg.' },
+          { type: 'p', text: 'Do večera je zapadlo toliko snega, da so morali pot domov delati drug za drugim, v vrsti. Prvi je hodil stric. Spet je bil najmočnejši med njimi.' },
+        ],
+      },
+      {
+        blocks: [
+          { type: 'h2', text: 'Nauk o zimi' },
+          { type: 'p', text: 'Doma jih je čakala hiša, v kateri je zadišalo po cimetu. Teta je kurila, stric je risal ledene rože, Jara je grel skodelice, Jasna pa je v vsako položila kepico sladoleda.' },
+          { type: 'p', text: 'Tistega večera so se naučili zadnjo in najpomembnejšo lekcijo o ravnovesju: včasih je treba nekoga, ki nas vedno hladi, tudi mi odnesti na goro in mu pomagati najti njegovo zimo.' },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Pages after the last chapter. */
@@ -522,7 +728,7 @@ export const backMatter: RawPage[] = [
   {
     blocks: [
       { type: 'h1', text: 'Konec' },
-      { type: 'p', text: 'Pa sta živela srečno do konca svojih dni – ona topla, on hladen, oba pa ravno prav.' },
+      { type: 'p', text: 'Pa so živeli srečno do konca svojih dni – ona topla, on hladen, otroka pa ravno prav. In v tisti hiši je bilo vreme vedno natanko takšno, kot je moralo biti.' },
     ],
   },
 ];
